@@ -60,7 +60,7 @@ public class SteepestHill
 		}
 		return best;
 	}
-
+ 	
  	//getters
  	public Board getBoard() {
 		return b;

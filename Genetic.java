@@ -110,47 +110,21 @@ public class Genetic
 	public void mutate(Board b)
 	{
 		Random rand = new Random();
-		int rQueen = rand.nextInt(size);
-		boolean bool = true;
+		int queen = rand.nextInt(size);
 		int row = rand.nextInt(size);
-		int column = rand.nextInt(size);
-		Queen q = new Queen(row, column);
-		while(bool)
-		{
-			bool = false;
-			row = rand.nextInt(size);
-			column = rand.nextInt(size);
-			q.setRow(row);
-			q.setColumn(column);
-			for(int i = 0; i < size; i++)
-			{
-				if(q.equals(b.getQueens()[i]))
-					bool = true;
-			}
-		}
-		b.getQueens()[rQueen] = q;
+		b.moveQueen(queen, row);
+		
 	}
 	
 	//takes two board and returns a board with some queens from each
 	public Board cross(Board board1, Board board2, int midpoint)
 	{
 		Board b1 = new Board(board1);
-		Board b2 = new Board(board2);
-		
-		
 		for(int i = midpoint; i < size; i++)
 		{
-			Queen q = b1.getQueens()[i].clone();
-			//set if queen is not equal to any other in b2
-			for(int j = i; j >= 0; j--)
-			{
-				if(b2.getQueens()[j].equals(q))
-					break;
-				if(j == 0)
-					b2.setQueen(i, q);
-			}
+			b1.moveQueen(i, board2.getBoard()[i]);
 		}
-		return b2;
+		return b1;
 	}
 	
 	//getters and setters
